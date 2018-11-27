@@ -212,7 +212,8 @@ title="{$imageTitle}">
 
 <!-- end thumbnails -->				
 
-{/if}{if $product->on_sale}	<label class="label-box sale-box">	<span class="sale-label">{l s='Sale'}</span></label>{/if}
+{/if}
+
 </div>
 
 </div> <!-- end pb-left-column -->
@@ -443,7 +444,9 @@ title="{$imageTitle}">
 
 </div> <!-- end attributes -->
 
-{/if}									
+{/if}		
+
+{hook h="displayPronesisSizeChart"}
 
 <!-- minimal quantity wanted -->
 
@@ -557,15 +560,15 @@ title="{$imageTitle}">
 
 <ul class="nav nav-tabs">
 
-{if $product->description}<li class="active"><a href="#tabs-1" data-toggle="tab">{l s='Description'}</a></li>{/if}				
 
-{if isset($features) && $features}
-
-<li><a href="#tabs-2" data-toggle="tab">{l s='Specification'}</a></li>
-
-{/if}
-
-<li><a href="#tabs-3" data-toggle="tab">{$HOOK_PRODUCT_TAB}</a></li>
+{if (isset($HOOK_PRODUCT_TAB) && $HOOK_PRODUCT_TAB) || (isset($HOOK_PRODUCT_TAB_CONTENT) && $HOOK_PRODUCT_TAB_CONTENT)}
+		<!--HOOK_PRODUCT_TAB -->
+		<section class="page-product-box">
+			{$HOOK_PRODUCT_TAB}
+			{if isset($HOOK_PRODUCT_TAB_CONTENT) && $HOOK_PRODUCT_TAB_CONTENT}{$HOOK_PRODUCT_TAB_CONTENT}{/if}
+		</section>
+		<!--end HOOK_PRODUCT_TAB -->
+		{/if}
 
 </ul>
 
